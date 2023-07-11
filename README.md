@@ -31,22 +31,33 @@ print(foo.encodePretty()) // {"a":"Hello" ... }
 
 let bar = """
 {
-  "a" : "Hello",
-  "b" : 1
-  "c" : [
-    {
-      "a" : "Hello"
-      "c" : [],
-    },
-    {
-      "a" : "Hello"
-      "c" : [],
-    }
-  ],
+    "a" : "Hello",
+    "b" : 1
+    "c" : [
+        {
+            "a" : "Hello"
+            "c" : [],
+        },
+        {
+            "a" : "Hello"
+            "c" : [],
+        }
+    ],
 }
 """
 
 let decodedObject: Wow = .decode(bar)
 ```
+
+---
+
+# Store enums as JSON
+
+```
+enum A: String, JSON {
+    case a,b,c
+}
+```
+
 
 
