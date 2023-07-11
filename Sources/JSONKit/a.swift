@@ -25,24 +25,30 @@ public extension JSON {
 
 public protocol JSONSuperiorRawValues: JSON {}
 
-public extension JSONSuperiorRawValues where Self: RawRepresentable, Self.RawValue == String {
-    init?(rawValue: String) {
-        if let o = Self.safeDecode(rawValue) {
-            self = o
-        } else {
-            return nil
-        }
-    }
-    var rawValue: String { toJSON() }
-    
-    static func decode(_ json: String) -> Self {
-        return Self.init(rawValue: RawValue.init(stringLiteral: json))!
-    }
-    func encode() -> String {
-        print("Hi")
-        return rawValue.encode()
-    }
-}
+
+// TODO: testTheStrangeBoy
+//public extension JSONSuperiorRawValues where Self: RawRepresentable, RawValue: JSONSuperiorObject  {
+//    init?(rawValue: RawValue) {
+//        print("Hee.")
+//        if let o = Self.safeDecode(rawValue.rawValue) {
+//            self = o
+//        } else {
+//            return nil
+//        }
+//    }
+//    var rawValue: RawValue {
+//        print("Hey")
+//        return RawValue.decode(self.toJSON())
+//    }
+//    
+//    static func decode(_ json: String) -> Self {
+//        print("Haw.")
+//        return Self.init(rawValue: .decode(json))!
+//    }
+//    func encode() -> String {
+//        return rawValue.rawValue
+//    }
+//}
 
 public extension JSONSuperiorRawValues where Self: RawRepresentable, Self.RawValue: JSON & ExpressibleByStringLiteral, Self.RawValue.StringLiteralType == String {
     static func decode(_ json: String) -> Self {
@@ -53,12 +59,9 @@ public extension JSONSuperiorRawValues where Self: RawRepresentable, Self.RawVal
     }
 }
 
-public protocol JSONSuperiorObject: JSONObject, RawRepresentable, ExpressibleByStringLiteral {}
+public protocol JSONSuperiorObject: JSONObject, RawRepresentable, ExpressibleByStringLiteral where RawValue == String, StringLiteralType == String {}
 
 public extension JSONSuperiorObject {
-    
-    typealias RawValue = String
-    typealias StringLiteralType = String
     
     static func decode(_ json: String) -> Self {
         return Self.init(rawValue: RawValue.init(stringLiteral: json))!
@@ -78,7 +81,9 @@ public extension JSONSuperiorObject {
             return nil
         }
     }
-    var rawValue: String { toJSON() }
+    var rawValue: String {
+        return toJSON()
+    }
 }
 
 
