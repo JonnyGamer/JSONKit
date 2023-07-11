@@ -8,7 +8,7 @@
 // All enums with a Raw value
 
 extension JSON where Self: RawRepresentable, RawValue: JSON {
-    func toJSON() -> String {
+    public func toJSON() -> String {
         return self.rawValue.toJSON()
     }
 }
@@ -23,7 +23,7 @@ public protocol JSONEnum: JSON {
     static var decoding: [String : () -> Self] { get }
 }
 extension JSONEnum {
-    func superEncode(_ name: String, values: [JSON]) -> String {
+    public func superEncode(_ name: String, values: [JSON]) -> String {
         if values.isEmpty {
             return "{\"\(name)-1\": null}"
         }
@@ -32,7 +32,7 @@ extension JSONEnum {
         })
         return "{" + wo.joined(separator: ", ") + "}"
     }
-    func toJSON() -> String {
+    public func toJSON() -> String {
         let name = String("\(self)".split(separator: "(")[0])
         
         var found = ""
@@ -42,8 +42,8 @@ extension JSONEnum {
         return found
     }
     
-    func encode(to encoder: Encoder) throws {}
-    init(from decoder: Decoder) throws {
+    public func encode(to encoder: Encoder) throws {}
+    public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: String.self)
         func decode<T: Decodable>(_ a: T.Type,_ forKey: String) -> T? { try? values.decode(a, forKey: forKey) }
         func exists(_ forKey: String) -> Bool { (try? values.decodeNil(forKey: forKey)) == true }
@@ -96,8 +96,8 @@ public func d<T: Decodable>() -> T {
     fatalError()
 }
 
-struct P<T: Decodable> {
-    static var `_`: T {
+public struct P<T: Decodable> {
+    public static var `_`: T {
         d()
     }
 }
