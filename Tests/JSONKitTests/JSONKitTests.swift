@@ -197,5 +197,39 @@ final class JSONKitTests: XCTestCase {
         
         XCTAssertEqual(Wow(), .decode(Wow().encode()))
         
+        var foo = Wow()
+        foo.b = 1
+        foo.c = [Wow(), Wow()]
+        print(foo.encodePretty()) // {"a":"Hello" ... }
+        
+        let bar = """
+        {
+        "a" : "Hello",
+          "b" : 1,
+          "c" : [
+            {
+              "c" : [],
+              "a" : "Hello"
+            },
+            {
+              "a" : "Hello",
+              "c" : []
+            }
+          ]
+        }
+        """
+
+        let decodedObject: Wow = .decode(bar)
+        XCTAssertEqual(foo, decodedObject)
+        
+        enum A: String, JSON {
+            case a,b,c
+        }
+
+        let encodedEnum: String = A.a.encode() // "[1, 2, 3]"
+        print(encodedEnum)
+        let decodedEnum: A = .decode(encodedEnum) // [1, 2, 3]
+        print(decodedEnum)
+        XCTAssertEqual(A.a, decodedEnum)
     }
 }
