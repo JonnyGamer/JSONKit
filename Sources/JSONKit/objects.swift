@@ -6,12 +6,12 @@
 //
 
 extension JSONObject {
-    func toJSON() -> String {
+    public func toJSON() -> String {
         json.automaticJSON()
     }
 }
 extension Dictionary where Key == String, Value == JSON {
-    func automaticJSON() -> String {
+    public func automaticJSON() -> String {
         let foo = map({ $0.toJSON() + ":" + $1.toJSON() })
         let bar = foo.joined(separator: ", ")
         return "{" + bar + "}"
