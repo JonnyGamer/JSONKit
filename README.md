@@ -31,18 +31,18 @@ print(foo.encodePretty()) // {"a":"Hello" ... }
 
 let bar = """
 {
-    "a" : "Hello",
-    "b" : 1
-    "c" : [
-        {
-            "a" : "Hello"
-            "c" : [],
-        },
-        {
-            "a" : "Hello"
-            "c" : [],
-        }
-    ],
+"a" : "Hello",
+  "b" : 1,
+  "c" : [
+    {
+              "c" : [],
+      "a" : "Hello"
+    },
+    {
+      "a" : "Hello",
+      "c" : []
+    }
+  ]
 }
 """
 
@@ -53,10 +53,13 @@ let decodedObject: Wow = .decode(bar)
 
 # Store enums as JSON
 
-```
+```swift
 enum A: String, JSON {
     case a,b,c
 }
+
+let encodedEnum: String = A.a.encode() // "[1, 2, 3]"
+let decodedEnum: [Int] = .decode(encodedArray) // [1, 2, 3]
 ```
 
 
