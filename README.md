@@ -65,7 +65,7 @@ let decodedEnum: A = .decode(encodedArray) // a
 ---
 # Bro, there's these complicated enums, too
 
-You may encode and decode these kinds of enums, as well. It doth require a little bit more setup than ordinary enums
+You may encode and decode these kinds of enums, as well. It doth require a little bit more setup than ordinary enums. However, I scratched my brain to make the setup as small and simple as possible. You should have seen what is was before!
 
 ```swift
 enum ThisIsSoCool: JSONEnum, Equatable {
