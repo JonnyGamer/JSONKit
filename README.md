@@ -13,7 +13,7 @@ let decodedArray: [Int] = .decode(encodedArray) // [1, 2, 3]
 ---
 
 # Store Custom Objects as JSON
-Here's an example of using a complex recursive object, and storing it as json
+Here's an example of using a complex recursive object, and storing it as json. Your opportunities are endless, so to speak.
 ```swift
 struct Wow: JSONObject {
     var a = "Hello"
