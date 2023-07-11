@@ -75,8 +75,6 @@ enum ThisIsSoCool: JSONEnum, Equatable {
     case d(Int, Int)
     case e(Int, [Int], [[Int]], [Self], Bool)
     indirect case f(Self)
-    case g(A)
-    case i(oboy)
     
     // Convert the things INTO JSON
     func allCases(_ run: AssociatedValues) {
@@ -87,8 +85,6 @@ enum ThisIsSoCool: JSONEnum, Equatable {
         case let .d(i, j): run(i, j)
         case let .e(i, j, k, l, m): run(i, j, k, l, m)
         case let .f(i): run(i)
-        case let .g(i): run(i)
-        case let .i(i): run(i)
         }
     }
     // Help specify the types when turning JSON back into Swift
@@ -99,8 +95,6 @@ enum ThisIsSoCool: JSONEnum, Equatable {
         "d" : { .d(P._, P._) },
         "e" : { .e(P._, P._, P._, P._, P._) },
         "f" : { .f(P._) },
-        "g" : { .g(P._) },
-        "i" : { .i(P._) }
     ]
 }
 ```
