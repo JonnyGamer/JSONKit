@@ -58,8 +58,8 @@ enum A: String, JSON {
     case a,b,c
 }
 
-let encodedEnum: String = A.a.encode() // "[1, 2, 3]"
-let decodedEnum: [Int] = .decode(encodedArray) // [1, 2, 3]
+let encodedEnum: String = A.a.encode() // "a"
+let decodedEnum: A = .decode(encodedArray) // a
 ```
 
 
